@@ -1,0 +1,92 @@
+.container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--secondary-color);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-md) var(--spacing-xl);
+  background-color: var(--bg-color);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.headerActions {
+  display: flex;
+  gap: var(--spacing-md);
+  align-items: center;
+}
+
+.logoutButton {
+  color: var(--text-color-muted);
+  font-size: 0.875rem;
+  transition: color var(--transition-fast);
+}
+
+.logoutButton:hover {
+  color: var(--text-color);
+}
+
+.main {
+  padding: var(--spacing-2xl) var(--spacing-xl);
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.sectionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-xl);
+}
+
+.sectionTitle {
+  font-size: 2rem;
+  font-weight: 800;
+}
+
+.createButton {
+  background-color: var(--primary-color);
+  color: var(--primary-color-text);
+  padding: var(--spacing-sm) var(--spacing-lg);
+  border-radius: var(--border-radius-full);
+  font-weight: 600;
+  transition: background-color var(--transition-fast);
+}
+
+.createButton:hover {
+  background-color: var(--primary-color-hover);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: var(--spacing-lg);
+}
+
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-2xl);
+  background-color: var(--bg-color);
+  border-radius: var(--border-radius-lg);
+  border: 1px dashed var(--border-color);
+  text-align: center;
+  gap: var(--spacing-md);
+}
+
+.emptyText {
+  color: var(--text-color-muted);
+  font-size: 1.125rem;
+}

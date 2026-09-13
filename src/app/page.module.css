@@ -1,0 +1,62 @@
+.container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: var(--spacing-xl);
+}
+
+.hero {
+  max-width: 800px;
+}
+
+.title {
+  font-size: 4rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-bottom: var(--spacing-md);
+  color: var(--primary-color);
+}
+
+.subtitle {
+  font-size: 1.5rem;
+  color: var(--text-color-muted);
+  margin-bottom: var(--spacing-2xl);
+  line-height: 1.5;
+}
+
+.ctaGroup {
+  display: flex;
+  gap: var(--spacing-md);
+  justify-content: center;
+}
+
+.primaryButton {
+  background-color: var(--primary-color);
+  color: var(--primary-color-text);
+  padding: var(--spacing-md) var(--spacing-xl);
+  border-radius: var(--border-radius-full);
+  font-size: 1.125rem;
+  font-weight: 600;
+  transition: background-color var(--transition-fast);
+}
+
+.primaryButton:hover {
+  background-color: var(--primary-color-hover);
+}
+
+.secondaryButton {
+  background-color: var(--secondary-color);
+  color: var(--secondary-color-text);
+  padding: var(--spacing-md) var(--spacing-xl);
+  border-radius: var(--border-radius-full);
+  font-size: 1.125rem;
+  font-weight: 600;
+  transition: background-color var(--transition-fast);
+}
+
+.secondaryButton:hover {
+  background-color: var(--secondary-color-hover);
+}

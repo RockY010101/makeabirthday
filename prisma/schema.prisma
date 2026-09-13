@@ -1,0 +1,99 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model User {
+  id        String   @id @default(uuid()) @db.Uuid
+  email     String   @unique
+  name      String?
+  createdAt DateTime @default(now()) @map("created_at")
+  
+  cards     Card[]
+  media     Media[]
+
+  @@map("users")
+}
+
+model Theme {
+  id        String   @id @default(uuid())
+  name      String
+  config    Json     // Stores CSS variables, typography, etc.
+  
+  cards     Card[]
+
+  @@map("themes")
+}
+
+model Card {
+  id             String   @id @default(uuid())
+  slug           String   @unique
+  title          String
+  recipientName  String   @map("recipient_name")
+  status         String   @default("draft") // "draft" | "published" | "archived"
+  createdAt      DateTime @default(now()) @map("created_at")
+  updatedAt      DateTime @updatedAt @map("updated_at")
+  
+  userId         String   @db.Uuid @map("user_id")
+  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  themeId        String?  @map("theme_id")
+  theme          Theme?   @relation(fields: [themeId], references: [id])
+  
+  settings       Json?    // Optional global settings (e.g. background audio)
+  
+  scenes         Scene[]
+
+  @@map("cards")
+}
+
+model Scene {
+  id        String   @id @default(uuid())
+  name      String
+  order     Int      @default(0)
+  config    Json     // Backgrounds, transitions, duration, etc.
+  
+  cardId    String   @map("card_id")
+  card      Card     @relation(fields: [cardId], references: [id], onDelete: Cascade)
+  
+  elements  Element[]
+
+  @@index([cardId])
+  @@map("scenes")
+}
+
+model Element {
+  id        String   @id @default(uuid())
+  type      String   // text, image, video, button, gift_box, etc.
+  order     Int      @default(0)
+  
+  // The separated schema structure requested by user:
+  content     Json?
+  transform   Json?
+  style       Json?
+  animation   Json?
+  interaction Json?
+  
+  sceneId   String   @map("scene_id")
+  scene     Scene    @relation(fields: [sceneId], references: [id], onDelete: Cascade)
+
+  @@index([sceneId])
+  @@map("elements")
+}
+
+model Media {
+  id        String   @id @default(uuid())
+  type      String   // image, video, audio
+  url       String
+  createdAt DateTime @default(now()) @map("created_at")
+  
+  userId    String   @db.Uuid @map("user_id")
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("media")
+}
